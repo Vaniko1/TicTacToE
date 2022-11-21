@@ -1,5 +1,6 @@
 package com.example.myapplication
 import android.graphics.Color
+import android.graphics.Color.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -73,12 +74,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun playGame(clickedView: Button, buttonNumber: Int) {
         if (activePlayer == 1) {
             clickedView.text = "X"
-            clickedView.setTextColor(Color.GREEN)
+            clickedView.setBackgroundColor(GREEN)
             activePlayer = 2
             firstPlayer.add(buttonNumber)
         } else {
             clickedView.text = "0"
-            clickedView.setTextColor(Color.RED)
+            clickedView.setBackgroundColor(RED)
             activePlayer = 1
             secondPlayer.add(buttonNumber)
         }
@@ -200,10 +201,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         button7.isEnabled = false
         button8.isEnabled = false
         button9.isEnabled = false
+
     }
 
     fun reload (){
-        init()
         button1.isEnabled = true
         button2.isEnabled = true
         button3.isEnabled = true
@@ -222,6 +223,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         button7.text = ""
         button8.text = ""
         button9.text = ""
+        button1.setBackgroundColor(BLUE)
+        button2.setBackgroundColor(BLUE)
+        button3.setBackgroundColor(BLUE)
+        button4.setBackgroundColor(BLUE)
+        button5.setBackgroundColor(BLUE)
+        button6.setBackgroundColor(BLUE)
+        button7.setBackgroundColor(BLUE)
+        button8.setBackgroundColor(BLUE)
+        button9.setBackgroundColor(BLUE)
         activePlayer = 1
         firstPlayer = ArrayList<Int>()
         secondPlayer = ArrayList<Int>()
