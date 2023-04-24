@@ -1,4 +1,5 @@
 1. (2 ქულა) დაუკავშირდით ორაკლ სერვერს როგორც პრივილეგირებული მომხმარებელი system და შექმენით როლი სკრიპტულად თქვენი გვარი_role და მიანიჭეთ შემდეგი სისტემური პრივილეგიები create session, create any table, create any view, create any index, create any sequence, create any synonym, alter any table, alter any index, alter any sequence, drop any table, drop any view, drop any index, drop any sequence, drop any synonym. მიანიჭეთ ობიექტ პრივილეგია მოსელექტება hr სქემის employees ცხრილზე. მიანიჭეთ როლი dba შექმნილ როლს.
+
 სკრიპტი:
 
 
@@ -18,6 +19,7 @@ grant select on hr.employees to nozadze_role;
 grant dba to nozadze_role;
 
 2. (2 ქულა) სკრიპტულად შექმენი მომხმარებელი btu_გვარი პაროლი btu, დეფაულტ ცხრილსივრცე users ულიმიტოდ, დროებით ცხრილსივრცედ temp, პროფაილი default. გადაამოწმეთ იუზერის არსებობა. მიანიჭეთ შექმნილი როლი ამ მომხმარებელს.
+
 სკრიპტი:
 create user btu_nozadze identified by btu
 default TABLESPACE users QUOTA UNLIMITED on users
@@ -29,6 +31,7 @@ select * from dba_users where username ='BTU_NOZADZE';
 grant nozadze_role to btu_nozadze;
 
 3. (1 ქულა) მიურთდით ბაზას როგორც მომხმარებელი btu_გვარი. გადაამოწმეთ ვინაობა. გადაამოწმეთ თუ ფლობს რაიმე ობიექტს.
+
 სკრიპტი:
 show user
 select * from dba_objects where owner='BTU_NOZADZE';
@@ -36,6 +39,8 @@ select * from dba_objects where owner='BTU_NOZADZE';
 4. (2 ქულა) შექმენი ცხრილი exam_გვარი რომელსაც ექნება 4 სვეტი: პირველი id რიცხვითი, members რიცხვითი (5) და მე-3 ვირტუალური სვეტი type,
 რომელიც შეყვანილი სწევრების მიხედვით დააგენერირებს სვეტის მნიშვნელობას თუ შეტანილი იქნება members-ში 1000-დან 5000-ის ჩათვლით private,
 თუ 5001-ზე მეტი share, მე-4 სვეტი appendix სიმბოლური მაქსიმუმ 50 სიმბოლო უჩინარი. შექმენი mem_idx ინდექსი members სვეტზე.
+
+სკრიპტი:
 
 create table exam_nozadze (id number, members number(5),
 type generated always as (
@@ -48,9 +53,13 @@ create index mem_idx on exam_nozadze(members);
 5. (1 ქულა) შექმენით მიმდევრობა seq_გვარი სახელით რომლის სტარტის წერტილია 12, ბიჯი 3, არ არის ციკლური,
 არის მოწესრიგებული, არ იყოს ქეშირებული, მაქსიმალური მნიშვნელობა 2001 და მინიმალური მნიშვნელობა 12.
 
+სკრიპტი:
+
 create sequence seq_nozadze start with 12 INCREMENT BY 3 NOCACHE ORDER MAXVALUE 2001 MINVALUE 12;
 
 6. (2 ქულა) შექმენი ტრიგერი exam_tr რომელიც ავტომატურ ზრდად id სვეტის მნიშვნელობებს დააგენერირებს ახალი ჩანაწერის შეტანისას exam_გვარი ცხრილში. 
+
+სკრიპტი:
 
 create or replace trigger exam_tr
 before insert on exam_nozadze
@@ -61,6 +70,7 @@ end;
 /
 
 7. (2 ქულა) შეიტანეთ exam_გვარი ცხრილში შემდეგი ჩანაწერები members და appendix სვეტებში
+
 2450, 'Tbilisi, btu is the best'
 11000, 'GTU cool exam'
 3150, 'GAU this day'
@@ -69,6 +79,7 @@ end;
 7900, 'UG great option'
 
 სკრიპტი:
+
 insert into exam_nozadze(members, appendix) values (2450, 'Tbilisi, btu is the best');
 insert into exam_nozadze(members, appendix) values (11000, 'GTU cool exam');
 insert into exam_nozadze(members, appendix) values (3150, 'GAU this day');
@@ -80,6 +91,8 @@ commit;
 8. (2 ქულა) შექმენით ქვემოთხოვნით ცხრილი emp სქემა hr-ის employees-ზე დაყრდნობით, საიდანაც აიღება მხოლოდ ის 
 ჩანაწერები სადაც გვარის სიგრზე არის 7-სიმბოლოზე ნაკლები.
 შექმენით ქვემოთხოვნით ცხრილი emp2 ცხრილ emp-ზე დაყრდნობით მხოლოდ კონსტრუქცია და არა ჩანაწერებიც.
+
+სკრიპტი:
 
 create table emp as
 select * from hr.employees
@@ -93,16 +106,19 @@ select * from emp;
 select * from emp2;
 
 9. (2 ქულა) შექმენი my_exam_view ხედი emp ცხრილის პირველი 12 ჩანაწერით.
+
 სკრიპტი:
 create view my_exam_view as
 select * from emp where rownum<=12;
 
 10. (2 ქულა) შექმენი სინონიმები exam_გვარი ცხრილზე t_chakh (t_გვარის პირველი 3 ასო) სახელით და my_exam_view ხედზე vu სახელით.  გადაამაწმეთ თუ რა ობიექტებს ფლობს მომხმარებელი.
+
 სკრიპტი:
 create synonym test_noz for exam_nozadze;
 create synonym vu for my_exam_view;
 
 11. (2 ქულა)
+
 a) შეიტანეთ ახალი ჩანაწერი ცხრილში test_გვარი 3000, 'my gtu forever';
 b) დაამოდიფიცირეთ ჩანაწერი რომლის აიდია 21 appendix სვეტში არსებულს მიუკონკატენირეთ აიდი და members სვეტის მნიშვნელობა;
 c) წაშალეთ ის სტრიქონები რომლებშიც appendix სვეტის სიგრძე არის 3-ის ჯერადი;  d) დაამატეთ სვეტი leader რიცხვითი;
@@ -159,7 +175,6 @@ alter table nozad_tab read only;
 12. (2 ქულა) შექმენით ახალი პროფილი exam_prof_გვარი რომელსაც ექნება შემდეგი პარამეტრები
 
     COMPOSITE_LIMIT	default
-    
     SESSIONS_PER_USER 	70
     CPU_PER_SESSION	unlimited
     CPU_PER_CALL 	unlimited
@@ -200,8 +215,8 @@ PASSWORD_GRACE_TIME 30;
 
 
 13. (1 ქულა) დაამოდიფიცირეთ btu_გვარი იუზერის პარამეტრები პაროლი გახადეთ btu23  და პროფილი exam_prof_გვარი.
-სკრიპტი:
 
+სკრიპტი:
 
 alter user btu_nozadze identified by btu23 profile exam_prof_nozadze;
 
