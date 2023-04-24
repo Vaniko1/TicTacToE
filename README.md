@@ -6,8 +6,11 @@ create role nozadze_role;
 
 
 grant create session, create any table, create any view, create any index, create any sequence,
+
 create any synonym, alter any table, alter any index, alter any sequence, drop any table,
+
 drop any view, drop any index, drop any sequence, drop any synonym
+
 to nozadze_role;
 
 grant select on hr.employees to nozadze_role;
@@ -201,20 +204,29 @@ PASSWORD_GRACE_TIME 30;
 alter user btu_nozadze identified by btu23 profile exam_prof_nozadze;
 
 14. (1 ქულა) გააქტიურე აუდიტი btu_გვარი იუზერის განხორციელებულ ნებისმიერ ბრძანებაზე. ნახე აუდიტის ლოგი. აუდიტი გააუქმე.
+15. 
 სკრიპტი:
 
 
 audit all statements by btu_nozadze;
+
 select * from dba_audit_trail;
+
 select * from DBA_STMT_AUDIT_OPTS;
+
 select * from SYS.AUD$;
+
 noaudit all statements by btu_nozadze;
 
 15. (1 ქულა) წაშალეთ იუზერი btu_გვარი. წაშალეთ როლი გვარი_role. წაშალეთ პროფილი exam_prof_გვარი. გადაამოწმეთ არსებობს თუ არა ეს იუზერი.
+16. 
 სკრიპტი:
 
 
 Drop user btu_nozadze cascade;
+
 Drop role nozadze_role;
+
 Drop profile exam_prof_nozadze;
+
 select * from dba_users where username ='BTU_NOZADZE';
