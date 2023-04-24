@@ -175,20 +175,35 @@ alter table nozad_tab read only;
 12. (2 ქულა) შექმენით ახალი პროფილი exam_prof_გვარი რომელსაც ექნება შემდეგი პარამეტრები
 
     COMPOSITE_LIMIT	default
+    
     SESSIONS_PER_USER 	70
+    
     CPU_PER_SESSION	unlimited
+    
     CPU_PER_CALL 	unlimited
+    
     LOGICAL_READS_PER_SESSION  700000
+    
     LOGICAL_READS_PER_CALL	60000
+    
     IDLE_TIME	12
+    
     CONNECT_TIME 	900
+    
     PRIVATE_SGA	default
+    
     FAILED_LOGIN_ATTEMPTS	30
+    
     PASSWORD_LIFE_TIME 	300
+    
     PASSWORD_REUSE_TIME 	240
+    
     PASSWORD_REUSE_MAX 	18
+    
     PASSWORD_VERIFY_FUNCTION 	null
+    
     PASSWORD_LOCK_TIME	10
+    
     PASSWORD_GRACE_TIME	30
     
 
@@ -196,22 +211,39 @@ alter table nozad_tab read only;
 
 
 CREATE PROFILE exam_prof_nozadze LIMIT
+
 COMPOSITE_LIMIT default
+
 SESSIONS_PER_USER 70
+
 CPU_PER_SESSION unlimited
+
 CPU_PER_CALL unlimited
+
 LOGICAL_READS_PER_SESSION 700000
+
 LOGICAL_READS_PER_CALL 60000
+
 IDLE_TIME 12
+
 CONNECT_TIME 900
+
 PRIVATE_SGA default
+
 FAILED_LOGIN_ATTEMPTS 30
+
 PASSWORD_LIFE_TIME 300
+
 PASSWORD_REUSE_TIME 240
+
 PASSWORD_REUSE_MAX 18
+
 PASSWORD_VERIFY_FUNCTION null
+
 PASSWORD_LOCK_TIME 10
+
 PASSWORD_GRACE_TIME 30;
+
 
 
 13. (1 ქულა) დაამოდიფიცირეთ btu_გვარი იუზერის პარამეტრები პაროლი გახადეთ btu23  და პროფილი exam_prof_გვარი.
