@@ -1,6 +1,9 @@
 1. (2 ქულა) დაუკავშირდით ორაკლ სერვერს როგორც პრივილეგირებული მომხმარებელი system და შექმენით როლი სკრიპტულად თქვენი გვარი_role და მიანიჭეთ შემდეგი სისტემური პრივილეგიები create session, create any table, create any view, create any index, create any sequence, create any synonym, alter any table, alter any index, alter any sequence, drop any table, drop any view, drop any index, drop any sequence, drop any synonym. მიანიჭეთ ობიექტ პრივილეგია მოსელექტება hr სქემის employees ცხრილზე. მიანიჭეთ როლი dba შექმნილ როლს.
 სკრიპტი:
+
+
 create role nozadze_role;
+
 
 grant create session, create any table, create any view, create any index, create any sequence,
 create any synonym, alter any table, alter any index, alter any sequence, drop any table,
@@ -170,6 +173,8 @@ alter table nozad_tab read only;
     
 
 სკრიპტი:
+
+
 CREATE PROFILE exam_prof_nozadze LIMIT
 COMPOSITE_LIMIT default
 SESSIONS_PER_USER 70
@@ -191,10 +196,14 @@ PASSWORD_GRACE_TIME 30;
 
 13. (1 ქულა) დაამოდიფიცირეთ btu_გვარი იუზერის პარამეტრები პაროლი გახადეთ btu23  და პროფილი exam_prof_გვარი.
 სკრიპტი:
+
+
 alter user btu_nozadze identified by btu23 profile exam_prof_nozadze;
 
 14. (1 ქულა) გააქტიურე აუდიტი btu_გვარი იუზერის განხორციელებულ ნებისმიერ ბრძანებაზე. ნახე აუდიტის ლოგი. აუდიტი გააუქმე.
 სკრიპტი:
+
+
 audit all statements by btu_nozadze;
 select * from dba_audit_trail;
 select * from DBA_STMT_AUDIT_OPTS;
@@ -203,6 +212,8 @@ noaudit all statements by btu_nozadze;
 
 15. (1 ქულა) წაშალეთ იუზერი btu_გვარი. წაშალეთ როლი გვარი_role. წაშალეთ პროფილი exam_prof_გვარი. გადაამოწმეთ არსებობს თუ არა ეს იუზერი.
 სკრიპტი:
+
+
 Drop user btu_nozadze cascade;
 Drop role nozadze_role;
 Drop profile exam_prof_nozadze;
