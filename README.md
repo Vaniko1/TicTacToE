@@ -157,7 +157,9 @@ alter table nozad_tab read only;
 
 
 12. (2 ქულა) შექმენით ახალი პროფილი exam_prof_გვარი რომელსაც ექნება შემდეგი პარამეტრები
+
     COMPOSITE_LIMIT	default
+    
     SESSIONS_PER_USER 	70
     CPU_PER_SESSION	unlimited
     CPU_PER_CALL 	unlimited
@@ -204,7 +206,7 @@ PASSWORD_GRACE_TIME 30;
 alter user btu_nozadze identified by btu23 profile exam_prof_nozadze;
 
 14. (1 ქულა) გააქტიურე აუდიტი btu_გვარი იუზერის განხორციელებულ ნებისმიერ ბრძანებაზე. ნახე აუდიტის ლოგი. აუდიტი გააუქმე.
-15. 
+
 სკრიპტი:
 
 
@@ -219,7 +221,7 @@ select * from SYS.AUD$;
 noaudit all statements by btu_nozadze;
 
 15. (1 ქულა) წაშალეთ იუზერი btu_გვარი. წაშალეთ როლი გვარი_role. წაშალეთ პროფილი exam_prof_გვარი. გადაამოწმეთ არსებობს თუ არა ეს იუზერი.
-16. 
+
 სკრიპტი:
 
 
